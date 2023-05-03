@@ -10,7 +10,7 @@ import Divider from "@mui/material/Divider";
 
 import { NavLink } from "react-router-dom";
 
-const DrawerLarge = ({ open, state, toggleDrawerSmall, sidebarList }: any) => {
+const DrawerSmall = ({ open, state, toggleDrawerSmall, sidebarList }: any) => {
   return (
     <Drawer
       open={state}
@@ -47,4 +47,4 @@ const DrawerLarge = ({ open, state, toggleDrawerSmall, sidebarList }: any) => {
   );
 };
 
-export default DrawerLarge;
+export default DrawerSmall;
