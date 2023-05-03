@@ -8,7 +8,7 @@ import {
   Login,
   NotFound,
   AllProperties,
-  // MyProfile,
+  MyProfile,
   // AgentProfile,
   // Agents,
   CreateProperty,
