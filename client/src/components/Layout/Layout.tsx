@@ -13,8 +13,8 @@ import {
   StarOutlineRounded,
   VillaOutlined,
 } from "@mui/icons-material";
-import Header from "./Header";
-import DrawerLarge from "./DrawerLarge";
+
+import { Header, DrawerLarge } from "../../components";
 import { ALL_ROUTES } from "../../shared/routes";
 
 const sidebarList = [
@@ -69,7 +69,7 @@ export function DashboardContainer() {
         }}
       >
         <Toolbar />
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
           <Outlet></Outlet>
         </Container>
       </Box>

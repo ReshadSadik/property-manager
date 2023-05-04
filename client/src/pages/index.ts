@@ -1,5 +1,5 @@
 import Dashboard from "./Dashboard";
-import { DashboardContainer } from "../components/Layout/Layout";
+import { DashboardContainer } from "../components/layout/Layout";
 import Login from "./Login";
 import MyProfile from "./MyProfile";
 import NotFound from "./NotFound";

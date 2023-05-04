@@ -24,4 +24,68 @@ export const defaultTheme = createTheme({
       secondary: "#808191",
     },
   },
+  // components :{
+  //   MuiFormControl: {
+  //     styleOverrides: {
+  //       root: {
+  //         marginBottom: '20px',
+  //         '& .MuiFormLabel-root': {
+  //           fontWeight: 500,
+  //           fontSize: '16px',
+  //           color: '#11142d',
+  //           margin: '10px 0',
+  //         },
+  //         '& .MuiInputBase-input': {
+  //           fontSize: '16px',
+  //           color: '#919191',
+  //         },
+  //         '& .MuiSelect-select': {
+  //           fontSize: '16px',
+  //         },
+  //         '& .MuiSelect-icon': {
+  //           color: '#919191',
+  //         },
+  //       },
+  //     },
+  //   },
+  //   MuiTextField: {
+  //     styleOverrides: {
+  //       root: {
+  //         '& .MuiInputBase-input': {
+  //           fontSize: '16px',
+  //           color: '#919191',
+  //         },
+  //       },
+  //     },
+  //   },
+  //   MuiButton: {
+  //     styleOverrides: {
+  //       root: {
+  //         textTransform: 'capitalize',
+  //         fontSize: '16px',
+  //         fontWeight: 500,
+  //       },
+  //     },
+  //   },
+  //   MuiTypography: {
+  //     styleOverrides: {
+  //       root: {
+  //         '&.MuiTypography-colorPrimary': {
+  //           color: '#11142d',
+  //         },
+  //       },
+  //     },
+  //   },
+  //   MuiFormHelperText: {
+  //     styleOverrides: {
+  //       root: {
+  //         fontWeight: 500,
+  //         fontSize: '16px',
+  //         color: '#11142d',
+  //         margin: '10px 0',
+  //       },
+  //     },
+  //   },
+
+  // },
 });

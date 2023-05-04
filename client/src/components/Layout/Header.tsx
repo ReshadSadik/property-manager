@@ -9,8 +9,7 @@ import Badge from "@mui/material/Badge";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import IconButton from "@mui/material/IconButton";
-
-import DrawerSmall from "./DrawerSmall";
+import { DrawerSmall } from "../../components";
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
