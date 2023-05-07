@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema(
     },
     confirmPassword: {
       type: String,
-      required: [true, "Please confirm your password"],
+
       validate: {
         validator: function (value) {
           return value === this.password;
@@ -84,6 +84,6 @@ userSchema.methods.comparePassword = function (password, hash) {
   return isPasswordValid;
 };
 
-const UserModel = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
 
-module.exports = UserModel;
+module.exports = User;

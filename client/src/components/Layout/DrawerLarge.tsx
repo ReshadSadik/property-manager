@@ -9,7 +9,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Tooltip } from "@mui/material";
 import { useAuth } from "../../shared/hooks/useAuth";
 
@@ -45,7 +45,6 @@ const Drawer = styled(MuiDrawer, {
 }));
 const DrawerLarge = ({ open, toggleDrawerLarge, sidebarList, state }: any) => {
   const theme = useTheme();
-  const navigate = useNavigate();
   const { setAuthToken } = useAuth();
   const signOut = () => {
     localStorage.removeItem("authToken");

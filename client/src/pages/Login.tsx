@@ -14,6 +14,7 @@ import Container from "@mui/material/Container";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../shared/hooks/useAuth";
+import { axiosOpen } from "../services/api/axios";
 
 type loginType = {
   email: string;
@@ -31,25 +32,18 @@ const Login = () => {
 
   const onFormSubmit: SubmitHandler<loginType> = async (data) => {
     try {
-      const response = await fetch("http://localhost:8080/api/v1/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: data.email,
-          password: data.password,
-        }),
+      const response = await axiosOpen.post("users/login", {
+        email: data.email,
+        password: data.password,
       });
+      const user = await response.data.data;
 
-      const user = await response.json();
-      console.log(user.data);
       if (user) {
-        localStorage.authToken = JSON.stringify(user.data.token);
-        localStorage.userDetails = JSON.stringify(user.data.user);
+        localStorage.authToken = JSON.stringify(user.token);
+        localStorage.userDetails = JSON.stringify(user.user);
       }
-      if (user.data.token) {
-        setAuthToken(user.data.token);
+      if (user.token) {
+        setAuthToken(user.token);
         navigate("/", { replace: true });
       }
     } catch (error) {}

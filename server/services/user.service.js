@@ -1,10 +1,10 @@
-const UserModel = require("../models/User");
+const User = require("../models/User");
 
 exports.signUpService = async (userInfo) => {
-  const user = await UserModel.create(userInfo);
+  const user = await User.create(userInfo);
   return user;
 };
 exports.findUserByEmail = async (userEmail) => {
-  const user = await UserModel.findOne({ email: userEmail });
+  const user = await User.findOne({ email: userEmail });
   return user;
 };

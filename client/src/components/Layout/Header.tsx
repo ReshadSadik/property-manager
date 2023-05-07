@@ -7,10 +7,9 @@ import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 
 import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import IconButton from "@mui/material/IconButton";
 import { DrawerSmall } from "../../components";
-import { Notifications, NotificationsOutlined } from "@mui/icons-material";
+import { NotificationsOutlined } from "@mui/icons-material";
 import { Avatar, Menu, MenuItem, Stack, Tooltip } from "@mui/material";
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 

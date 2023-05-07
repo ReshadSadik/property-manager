@@ -26,7 +26,6 @@ exports.signUp = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body);
 
     if (!email || !password) {
       return res.status(401).json({
@@ -43,7 +42,6 @@ exports.login = async (req, res) => {
         error: "No user found. Please create an account",
       });
     }
-    console.log(user);
     const isPasswordValid = user.comparePassword(password, user.password);
 
     if (!isPasswordValid) {
