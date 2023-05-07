@@ -1,14 +1,15 @@
 import "./App.css";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { ALL_ROUTES } from "./shared/routes";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { ContextProviderContainer } from "./components/ContextProviderContainer";
 import {
   DashboardContainer,
   Dashboard,
   Login,
   NotFound,
   AllProperties,
-  MyProfile,
+  // MyProfile,
   // AgentProfile,
   // Agents,
   CreateProperty,
@@ -19,7 +20,7 @@ import {
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <ContextProviderContainer>
         <Routes>
           <Route path={ALL_ROUTES.LOGIN} element={<Login />} />
           <Route path="*" element={<NotFound />} />
@@ -39,7 +40,7 @@ function App() {
           <Route />
           <Route />
         </Routes>
-      </BrowserRouter>
+      </ContextProviderContainer>
     </div>
   );
 }

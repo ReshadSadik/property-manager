@@ -24,7 +24,7 @@ const sidebarList = [
   { title: "Reviews", link: "barcode", icon: StarOutlineRounded },
   { title: "Messages", link: "category", icon: ChatBubbleOutline },
   { title: "My Profile", link: "brand", icon: AccountCircleOutlined },
-  { title: "SignOut", link: "login", icon: AccountCircleIcon },
+  { title: "SignOut", link: "/login", icon: AccountCircleIcon },
 ];
 
 export function DashboardContainer() {

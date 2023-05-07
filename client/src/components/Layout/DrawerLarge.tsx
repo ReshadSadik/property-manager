@@ -9,8 +9,9 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Tooltip } from "@mui/material";
+import { useAuth } from "../../shared/hooks/useAuth";
 
 const drawerWidth = 250;
 const Drawer = styled(MuiDrawer, {
@@ -44,7 +45,18 @@ const Drawer = styled(MuiDrawer, {
 }));
 const DrawerLarge = ({ open, toggleDrawerLarge, sidebarList, state }: any) => {
   const theme = useTheme();
-
+  const navigate = useNavigate();
+  const { setAuthToken } = useAuth();
+  const signOut = () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userDetails");
+    setAuthToken(undefined);
+  };
+  const handleNavMenu = (title: string) => {
+    if (title === "SignOut") {
+      signOut();
+    }
+  };
   return (
     <Drawer
       sx={{ display: { md: "flex", xs: "none" } }}
@@ -70,6 +82,7 @@ const DrawerLarge = ({ open, toggleDrawerLarge, sidebarList, state }: any) => {
             key={sidebar.title}
             to={sidebar.link}
             style={{ textDecoration: "none" }}
+            onClick={() => handleNavMenu(sidebar.title)}
           >
             {({ isActive }) => (
               <ListItemButton
