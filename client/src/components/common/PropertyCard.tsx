@@ -1,4 +1,7 @@
-import { Place } from "@mui/icons-material";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import BedOutlinedIcon from "@mui/icons-material/BedOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+
 import { Link } from "react-router-dom";
 import {
   Typography,
@@ -7,6 +10,9 @@ import {
   CardMedia,
   CardContent,
   Stack,
+  CardActions,
+  useTheme,
+  Skeleton,
 } from "@mui/material";
 
 import { PropertyCardProps } from "../../interfaces/property";
@@ -17,7 +23,9 @@ const PropertyCard = ({
   location,
   price,
   photo,
+  loading,
 }: PropertyCardProps) => {
+  const theme = useTheme();
   return (
     <Card
       component={Link}
@@ -25,67 +33,123 @@ const PropertyCard = ({
       sx={{
         padding: "10px",
         display: "grid",
-        gridTemplateColumns: { md: "230px auto", sm: "120px auto" },
+        gridTemplateColumns: {
+          lg: "220px auto",
+          sm: "150px auto",
+          xs: "115px auto",
+        },
         height: "auto",
 
         "&:hover": {
-          boxShadow: "0 22px 45px 2px rgba(176, 176, 176, 0.1)",
+          boxShadow: "0 22px 45px 2px rgba(176, 176, 176, 0.2)",
         },
+        background: "#fcfcfc",
         cursor: "pointer",
+        textDecoration: "none",
       }}
       elevation={0}
     >
-      <CardMedia
-        component="img"
-        image={photo}
-        alt="card image"
-        sx={{
-          borderRadius: "10px",
-          height: { md: 130, xs: 70 },
-          width: { md: 220, xs: 115 },
-        }}
-      />
-      <CardContent
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          gap: "10px",
-
-          paddingX: "5px",
-        }}
-      >
-        <Stack direction="column" gap={1}>
-          <Box
-            px={1.5}
-            py={0.5}
-            borderRadius={1}
-            bgcolor="#dadefa"
-            height="fit-content"
-          >
+      {!loading ? (
+        <CardMedia
+          component="img"
+          image={photo}
+          alt="card image"
+          sx={{
+            borderRadius: "10px",
+            height: { lg: 125, sm: 100, xs: 70 },
+            width: { lg: 220, sm: 150, xs: 115 },
+          }}
+        />
+      ) : (
+        <Skeleton
+          animation="pulse"
+          variant="rectangular"
+          width={210}
+          height={118}
+        />
+      )}
+      {!loading ? (
+        <CardContent
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            gap: "5px",
+            padding: "0 0 2px 10px",
+            textAlign: "left",
+            ":last-child": {
+              paddingBottom: 0,
+            },
+          }}
+        >
+          <Stack direction="column" gap={1} justifyContent="space-between">
             {" "}
-            <Typography fontSize={12} fontWeight={600} color="#475be8">
-              ${price}
-            </Typography>
-          </Box>
-
-          <Typography fontSize={16} fontWeight={500} color="#11142d">
-            {title}
-          </Typography>
-          <Stack direction="row" gap={0.5} alignItems="flex-start">
-            <Place
+            <Typography
+              variant="subtitle2"
               sx={{
-                fontSize: 18,
-                color: "#11142d",
-                marginTop: 0.5,
+                background: "#DADEFA",
+                padding: "5px 15px",
+                borderRadius: "5px",
               }}
-            />
-            <Typography fontSize={14} color="#808191">
-              {location}
+              width="fit-content"
+              color="#475be8"
+            >
+              $ {price}
             </Typography>
+            <Typography
+              variant="h6"
+              fontSize={{ md: "16px", xs: "12px" }}
+              fontWeight={{ md: 600, xs: 500 }}
+            >
+              {title}
+            </Typography>
+            <Stack direction="row" gap={0.5} alignItems="flex-start">
+              <LocationOnOutlinedIcon
+                sx={{
+                  fontSize: 20,
+                  color: "#808191",
+                  marginTop: 0.2,
+                }}
+              />
+              <Typography variant="body2">{location}</Typography>
+            </Stack>
+            <CardActions sx={{ padding: "0 0 0 4px" }}>
+              <Stack direction="row" gap={1.5} alignItems="flex-start">
+                <Stack direction="row" gap={0.5} alignItems="flex-start">
+                  <BedOutlinedIcon
+                    sx={{
+                      fontSize: 18,
+                      color: theme.palette.text.secondary,
+                    }}
+                  />
+                  <Typography variant="subtitle1" fontWeight={600}>
+                    6 Beds
+                  </Typography>
+                </Stack>
+                <Stack direction="row" gap={0.5} alignItems="flex-start">
+                  <FavoriteIcon
+                    sx={{
+                      fontSize: 15,
+                      color: theme.palette.text.secondary,
+                      marginTop: 0.1,
+                    }}
+                  />
+                  <Typography variant="subtitle1" fontWeight={600}>
+                    2M
+                  </Typography>
+                </Stack>
+              </Stack>
+            </CardActions>
           </Stack>
-        </Stack>
-      </CardContent>
+        </CardContent>
+      ) : (
+        <Box sx={{ pt: 0.5 }}>
+          <Skeleton width="10%" />
+          <Skeleton width="50%" />
+          <Skeleton width="40%" />
+          <Skeleton width="20%" />
+        </Box>
+      )}
     </Card>
   );
 };

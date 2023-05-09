@@ -1,5 +1,4 @@
 import { Add } from "@mui/icons-material";
-// import { useTable } from "@refinedev/core";
 import {
   Box,
   Stack,
@@ -7,6 +6,7 @@ import {
   TextField,
   Select,
   MenuItem,
+  Pagination,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
@@ -17,26 +17,28 @@ import { PropertyCardProps } from "../../interfaces/property";
 
 const AllProperties = () => {
   const navigate = useNavigate();
-  const [allProperties, setAllProperties] = useState([]);
+  const [pages, setPages] = useState(1);
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPages(value);
+  };
+  const [properties, setProperties] = useState({
+    total: 0,
+    page: 0,
+    allProperties: [],
+  });
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     (async () => {
-      const response = await axiosOpen.get("/properties");
-      if (response.status == 200) setAllProperties(response?.data?.data);
+      setLoading(true);
+      const response = await axiosOpen.get(`/properties?page=${pages}`);
+      if (response.status == 200) {
+        setProperties(response?.data?.data);
+        setLoading(false);
+      }
     })();
-  }, []);
-  console.log(allProperties);
-
-  // const {
-  //     tableQueryResult: { data, isLoading, isError },
-  //     current,
-  //     setCurrent,
-  //     setPageSize,
-  //     pageCount,
-  //     sorter,
-  //     setSorter,
-  //     filters,
-  //     setFilters,
-  // } = useTable();
+  }, [pages]);
+  console.log(properties);
+  const memoizedProperties = useMemo(() => properties, [properties]);
 
   // const allProperties = data?.data ?? [];
 
@@ -66,26 +68,40 @@ const AllProperties = () => {
 
   return (
     <Box>
-      <Box mt="20px" sx={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
-        <Stack direction="column" width="100%">
-          <Typography fontSize={25} fontWeight={700} color="#11142d">
-            All Properties
-          </Typography>
+      <Box
+        mt="20px"
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+          alignItems: "center",
+          gap: 3,
+        }}
+      >
+        <Typography variant="h1">Property List</Typography>
+        <CustomButton
+          title="Add Property"
+          handleClick={() => navigate("/properties/create")}
+          backgroundColor="#475be8"
+          color="#fcfcfc"
+          icon={<Add />}
+        />
+
+        {/* <Box
+          mb={2}
+          mt={3}
+          display="flex"
+          width="84%"
+          justifyContent="space-between"
+          flexWrap="wrap"
+        >
           <Box
-            mb={2}
-            mt={3}
             display="flex"
-            width="84%"
-            justifyContent="space-between"
+            gap={2}
             flexWrap="wrap"
-          >
-            <Box
-              display="flex"
-              gap={2}
-              flexWrap="wrap"
-              mb={{ xs: "20px", sm: 0 }}
-            >
-              {/* <CustomButton
+            mb={{ xs: "20px", sm: 0 }}
+          > */}
+        {/* <CustomButton
                                 title={`Sort price ${
                                     currentPrice === "asc" ? "↑" : "↓"
                                 }`}
@@ -93,7 +109,7 @@ const AllProperties = () => {
                                 backgroundColor="#475be8"
                                 color="#fcfcfc"
                             /> */}
-              {/* <TextField
+        {/* <TextField
                                 variant="outlined"
                                 color="info"
                                 placeholder="Search by title"
@@ -150,89 +166,68 @@ const AllProperties = () => {
                                     </MenuItem>
                                 ))}
                             </Select> */}
-            </Box>
-          </Box>
-        </Stack>
+        {/* </Box>
+        </Box> */}
       </Box>
 
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <CustomButton
-          title="Add Property"
-          handleClick={() => navigate("/properties/create")}
-          backgroundColor="#475be8"
-          color="#fcfcfc"
-          icon={<Add />}
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+      ></Stack>
+      <Box>
+        <Box
+          mt="20px"
+          sx={{
+            backgroundColor: "#fcfcfc",
+            height: "auto",
+            borderRadius: "15px",
+            padding: "10px",
+            display: "grid",
+            gridGap: "10px",
+            gridTemplateColumns: {
+              md: "repeat(2, 1fr)",
+              xs: "repeat(1, 1fr)",
+            },
+          }}
+        >
+          {(loading
+            ? Array.from(new Array(4))
+            : memoizedProperties.allProperties
+          ).map((property: PropertyCardProps) => (
+            <PropertyCard
+              key={property?._id}
+              _id={property?._id}
+              title={property?.title}
+              location={property?.location}
+              price={property?.price}
+              photo={property?.photo}
+              loading={loading}
+            />
+          ))}
+        </Box>
+      </Box>
+
+      {/* pagination here */}
+      <Stack
+        spacing={2}
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        marginTop={2}
+      >
+        <Typography variant="body2">
+          Showing {memoizedProperties.allProperties?.length} of{" "}
+          {memoizedProperties.total} Properties
+        </Typography>
+        <Pagination
+          shape="rounded"
+          color="primary"
+          count={Math.ceil(memoizedProperties.total / 4)}
+          page={pages}
+          onChange={handleChange}
         />
       </Stack>
-
-      <Box
-        mt="20px"
-        sx={{
-          height: "auto",
-          display: "grid",
-          gridGap: "1rem",
-          gridTemplateColumns: { md: "repeat(2, 1fr)", xs: "repeat(1, 1fr)" },
-        }}
-      >
-        {allProperties?.map((property: PropertyCardProps) => (
-          <PropertyCard
-            key={property._id}
-            _id={property._id}
-            title={property.title}
-            location={property.location}
-            price={property.price}
-            photo={property.photo}
-          />
-        ))}
-      </Box>
-
-      {/* {allProperties.length > 0 && (
-                <Box display="flex" gap={2} mt={3} flexWrap="wrap">
-                    <CustomButton
-                        title="Previous"
-                        handleClick={() => setCurrent((prev) => prev - 1)}
-                        backgroundColor="#475be8"
-                        color="#fcfcfc"
-                        disabled={!(current > 1)}
-                    />
-                    <Box
-                        display={{ xs: "hidden", sm: "flex" }}
-                        alignItems="center"
-                        gap="5px"
-                    >
-                        Page{" "}
-                        <strong>
-                            {current} of {pageCount}
-                        </strong>
-                    </Box>
-                    <CustomButton
-                        title="Next"
-                        handleClick={() => setCurrent((prev) => prev + 1)}
-                        backgroundColor="#475be8"
-                        color="#fcfcfc"
-                        disabled={current === pageCount}
-                    />
-                    <Select
-                        variant="outlined"
-                        color="info"
-                        displayEmpty
-                        required
-                        inputProps={{ "aria-label": "Without label" }}
-                        defaultValue={10}
-                        onChange={(e) =>
-                            setPageSize(
-                                e.target.value ? Number(e.target.value) : 10,
-                            )
-                        }
-                    >
-                        {[10, 20, 30, 40, 50].map((size) => (
-                            <MenuItem key={size} value={size}>
-                                Show {size}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </Box>
-            )} */}
     </Box>
   );
 };

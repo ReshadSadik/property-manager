@@ -19,4 +19,5 @@ export interface PropertyCardProps {
   location: string;
   price: string;
   photo: string;
+  loading: boolean;
 }

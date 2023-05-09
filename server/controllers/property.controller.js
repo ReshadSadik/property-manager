@@ -1,6 +1,10 @@
 const User = require("../models/User");
 const Property = require("../models/Property");
 const mongoose = require("mongoose");
+const {
+  createPropertyService,
+  getAllPropertyService,
+} = require("../services/property.service");
 
 const cloudinary = require("cloudinary").v2;
 
@@ -13,15 +17,67 @@ cloudinary.config({
 
 exports.getAllProperties = async (req, res) => {
   try {
-    const allProperties = await Property.find({});
+    //{price:{$ gt:50}
+    //{ price: { gt: '50' } }
+    console.log(req.query);
+
+    let filters = { ...req.query };
+
+    //sort , page , limit -> exclude
+    const excludeFields = ["sort", "page", "limit"];
+    excludeFields.forEach((field) => delete filters[field]);
+
+    //gt ,lt ,gte .lte
+    let filtersString = JSON.stringify(filters);
+    filtersString = filtersString.replace(
+      /\b(gt|gte|lt|lte)\b/g,
+      (match) => `$${match}`
+    );
+
+    filters = JSON.parse(filtersString);
+
+    const queries = {};
+
+    if (req.query.sort) {
+      // price,qunatity   -> 'price quantity'
+      const sortBy = req.query.sort.split(",").join(" ");
+      queries.sortBy = sortBy;
+      console.log(sortBy);
+    }
+
+    if (req.query.fields) {
+      const fields = req.query.fields.split(",").join(" ");
+      queries.fields = fields;
+      console.log(fields);
+    }
+
+    if (req.query.page) {
+      const { page = 1, limit = 4 } = req.query; // "3" "10"
+      //50 products
+      // each page 10 product
+      //page 1--> 1-10
+      //page 2--> 2-20
+      //page 3--> 21-30     --> page 3  -> skip 1-20  -> 3-1 ->2 *10
+      //page 4--> 31-40      ---> page 4 --> 1-30  --> 4-1  -->3*10
+      //page 5--> 41-50
+
+      const skip = (page - 1) * parseInt(limit);
+      queries.skip = skip;
+      queries.limit = parseInt(limit);
+    }
+
+    const allProperties = await getAllPropertyService(filters, queries);
 
     res.status(200).json({
       status: "success",
-      message: "all property get  successfully",
       data: allProperties,
     });
   } catch (error) {
-    res.status(500).json({ status: "fail", message: error.message });
+    res.status(400).json({
+      status: "fail",
+      message: "can't get the data",
+      error: error.message,
+    });
   }
 };
 exports.getPropertyDetail = async (req, res) => {};
@@ -41,7 +97,7 @@ exports.createProperty = async (req, res) => {
     // uploading property image to cloudinary
     const photoUrl = await cloudinary.uploader.upload(photo);
 
-    const newProperty = await Property.create({
+    const newProperty = await createPropertyService({
       title,
       description,
       propertyType,

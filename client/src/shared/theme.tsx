@@ -17,11 +17,55 @@ export const defaultTheme = createTheme({
     },
     grey: {
       A100: "#fcfcfc",
-      A200: "#e5e5e5",
+      A200: "#f4f4f4",
     },
     text: {
       primary: "#11142D",
       secondary: "#808191",
+    },
+  },
+  typography: {
+    h1: {
+      fontSize: "25px",
+      fontWeight: 700,
+      lineHeight: "34px",
+      color: "#11142D",
+    },
+    h3: {
+      fontSize: "18px",
+      fontWeight: 700,
+      lineHeight: "24px",
+      color: "#11142D",
+    },
+    h6: {
+      fontSize: "16px",
+      fontWeight: 600,
+      lineHeight: "24px",
+      color: "#11142D",
+    },
+    body1: {
+      fontSize: "14px",
+      fontWeight: 500,
+      lineHeight: "20px",
+      color: "#11142D",
+    },
+    body2: {
+      fontSize: "14px",
+      fontWeight: 500,
+      lineHeight: "20px",
+      color: "#808191",
+    },
+    subtitle1: {
+      fontSize: "12px",
+      fontWeight: 400,
+      lineHeight: "16px",
+      color: "#11142D",
+    },
+    subtitle2: {
+      fontSize: "12px",
+      fontWeight: 400,
+      lineHeight: "16px",
+      color: "#808191",
     },
   },
   // components :{

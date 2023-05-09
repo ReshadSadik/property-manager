@@ -22,9 +22,10 @@ const CustomButton = ({
         width: fullWidth ? "100%" : "fit-content",
         minWidth: 130,
         backgroundColor,
+        borderRadius: "10px",
         color,
-        fontSize: 16,
-        fontWeight: 600,
+        fontSize: 14,
+        fontWeight: 400,
         gap: "10px",
         textTransform: "capitalize",
         "&:hover": {
