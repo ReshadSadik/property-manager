@@ -11,7 +11,19 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-exports.getAllProperties = async (req, res) => {};
+exports.getAllProperties = async (req, res) => {
+  try {
+    const allProperties = await Property.find({});
+
+    res.status(200).json({
+      status: "success",
+      message: "all property get  successfully",
+      data: allProperties,
+    });
+  } catch (error) {
+    res.status(500).json({ status: "fail", message: error.message });
+  }
+};
 exports.getPropertyDetail = async (req, res) => {};
 
 exports.createProperty = async (req, res) => {

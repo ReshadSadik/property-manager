@@ -9,12 +9,22 @@ import {
   MenuItem,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { PropertyCard, CustomButton } from "../../components";
+import { axiosOpen } from "../../services/api/axios";
+import { PropertyCardProps } from "../../interfaces/property";
 
 const AllProperties = () => {
   const navigate = useNavigate();
+  const [allProperties, setAllProperties] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const response = await axiosOpen.get("/properties");
+      if (response.status == 200) setAllProperties(response?.data?.data);
+    })();
+  }, []);
+  console.log(allProperties);
 
   // const {
   //     tableQueryResult: { data, isLoading, isError },
@@ -155,17 +165,25 @@ const AllProperties = () => {
         />
       </Stack>
 
-      <Box mt="20px" sx={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
-        {/* {allProperties?.map((property) => (
-                    <PropertyCard
-                        key={property._id}
-                        id={property._id}
-                        title={property.title}
-                        location={property.location}
-                        price={property.price}
-                        photo={property.photo}
-                    />
-                ))} */}
+      <Box
+        mt="20px"
+        sx={{
+          height: "auto",
+          display: "grid",
+          gridGap: "1rem",
+          gridTemplateColumns: { md: "repeat(2, 1fr)", xs: "repeat(1, 1fr)" },
+        }}
+      >
+        {allProperties?.map((property: PropertyCardProps) => (
+          <PropertyCard
+            key={property._id}
+            _id={property._id}
+            title={property.title}
+            location={property.location}
+            price={property.price}
+            photo={property.photo}
+          />
+        ))}
       </Box>
 
       {/* {allProperties.length > 0 && (

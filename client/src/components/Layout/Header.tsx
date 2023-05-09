@@ -97,13 +97,13 @@ const Header = ({ open, toggleDrawerLarge, sidebarList }: any) => {
             marginRight: "36px",
             ...(open && { display: "none" }),
 
-            display: { md: "flex", xs: "none" },
+            display: { lg: "flex", xs: "none" },
           }}
         >
           <MenuIcon />
         </IconButton>
 
-        <Box sx={{ display: { md: "none", xs: "flex" } }}>
+        <Box sx={{ display: { lg: "none", xs: "flex" } }}>
           <MenuIcon
             sx={{ marginRight: "36px" }}
             onClick={() => {

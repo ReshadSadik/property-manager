@@ -58,7 +58,7 @@ const DrawerLarge = ({ open, toggleDrawerLarge, sidebarList, state }: any) => {
   };
   return (
     <Drawer
-      sx={{ display: { md: "flex", xs: "none" } }}
+      sx={{ display: { lg: "flex", xs: "none" } }}
       variant="permanent"
       open={open}
     >
