@@ -25,6 +25,8 @@ export const defaultTheme = createTheme({
     },
   },
   typography: {
+    fontFamily: " 'Manrope', sans-serif",
+
     h1: {
       fontSize: "25px",
       fontWeight: 700,
@@ -32,8 +34,20 @@ export const defaultTheme = createTheme({
       color: "#11142D",
     },
     h3: {
-      fontSize: "18px",
+      fontSize: "22px",
+      fontWeight: 600,
+      lineHeight: "30px",
+      color: "#11142D",
+    },
+    h4: {
+      fontSize: "20px",
       fontWeight: 700,
+      lineHeight: "24px",
+      color: "#11142D",
+    },
+    h5: {
+      fontSize: "18px",
+      fontWeight: 500,
       lineHeight: "24px",
       color: "#11142D",
     },
@@ -51,7 +65,7 @@ export const defaultTheme = createTheme({
     },
     body2: {
       fontSize: "14px",
-      fontWeight: 500,
+      fontWeight: 400,
       lineHeight: "20px",
       color: "#808191",
     },

@@ -8,7 +8,7 @@ const PropertySchema = new mongoose.Schema({
   price: { type: Number, required: true },
   photo: { type: String, required: true },
   creator: {
-    nama: String,
+    name: String,
     id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const {
   createPropertyService,
   getAllPropertyService,
+  getPropertyDetailsService,
+  deletePropertyByIdService,
 } = require("../services/property.service");
 
 const cloudinary = require("cloudinary").v2;
@@ -80,12 +82,30 @@ exports.getAllProperties = async (req, res) => {
     });
   }
 };
-exports.getPropertyDetail = async (req, res) => {};
+exports.getPropertyDetail = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const propertyDetails = await getPropertyDetailsService(id);
+    if (!propertyDetails) {
+      // return throw error
+    }
+    res.status(200).json({
+      status: "success",
+      data: propertyDetails,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: "can't get property detail",
+      error: error.message,
+    });
+  }
+};
 
 exports.createProperty = async (req, res) => {
   const { title, description, propertyType, location, price, photo, email } =
     req.body;
-  console.log("hi");
+
   try {
     // start a new session
     const session = await mongoose.startSession();
@@ -125,4 +145,16 @@ exports.createProperty = async (req, res) => {
   }
 };
 exports.updateProperty = async (req, res) => {};
-exports.deleteProperty = async (req, res) => {};
+exports.deleteProperty = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await deletePropertyByIdService(id);
+    if (response.deletedCount > 0) {
+      res
+        .status(200)
+        .json({ status: "success", message: "Property deleted successfully" });
+    }
+  } catch (error) {
+    res.status(500).json({ status: "fail", message: error.message });
+  }
+};

@@ -29,7 +29,7 @@ const PropertyCard = ({
   return (
     <Card
       component={Link}
-      to={`/properties/show/${_id}`}
+      to={`/properties/${_id}`}
       sx={{
         padding: "10px",
         display: "grid",

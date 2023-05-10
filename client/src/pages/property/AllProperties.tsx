@@ -18,15 +18,15 @@ import { PropertyCardProps } from "../../interfaces/property";
 const AllProperties = () => {
   const navigate = useNavigate();
   const [pages, setPages] = useState(1);
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setPages(value);
-  };
+  const [loading, setLoading] = useState(true);
   const [properties, setProperties] = useState({
     total: 0,
     page: 0,
     allProperties: [],
   });
-  const [loading, setLoading] = useState(true);
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPages(value);
+  };
   useEffect(() => {
     (async () => {
       setLoading(true);
@@ -37,7 +37,6 @@ const AllProperties = () => {
       }
     })();
   }, [pages]);
-  console.log(properties);
   const memoizedProperties = useMemo(() => properties, [properties]);
 
   // const allProperties = data?.data ?? [];

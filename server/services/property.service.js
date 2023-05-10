@@ -15,3 +15,11 @@ exports.createPropertyService = async (propertyDetails) => {
   const response = await Property.create(propertyDetails);
   return response;
 };
+exports.getPropertyDetailsService = async (id) => {
+  const response = await Property.find({ _id: id }).populate("creator.id");
+  return response;
+};
+exports.deletePropertyByIdService = async (id) => {
+  const response = await Property.deleteOne({ _id: id });
+  return response;
+};
