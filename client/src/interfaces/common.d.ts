@@ -29,7 +29,6 @@ export interface PropertyProps {
 export interface FormProps {
   type: string;
   register: any;
-  onFinish: boolean;
   formLoading: boolean;
   handleSubmit: FormEventHandler<HTMLFormElement> | undefined;
   handleImageChange: (file) => void;

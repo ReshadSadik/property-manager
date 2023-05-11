@@ -5,15 +5,14 @@ import { FieldValues, useForm } from "react-hook-form";
 import Form from "../../components/common/Form";
 import { useAuth } from "../../shared/hooks/useAuth";
 import { axiosOpen } from "../../services/api/axios";
+import { useNavigate } from "react-router-dom";
 
 const CreateProperty = () => {
-  // const { data: user } = useGetIdentity({
-  //   v3LegacyAuthProviderCompatible: true,
-  // });
-  // const {}= useAuth();
+  const navigate = useNavigate();
+
   const [propertyImage, setPropertyImage] = useState({ name: "", url: "" });
   const {
-    formState: { isLoading, isSubmitted },
+    formState: { isSubmitting },
     register,
     handleSubmit,
   } = useForm();
@@ -41,7 +40,10 @@ const CreateProperty = () => {
     };
     try {
       const response = await axiosOpen.post("properties", propertyObject);
-      console.log(response);
+      if (response.status === 200) {
+        window.alert("property updated successfully");
+        navigate("/properties");
+      }
     } catch (error) {}
   };
 
@@ -49,8 +51,7 @@ const CreateProperty = () => {
     <Form
       type="Create"
       register={register}
-      onFinish={isSubmitted}
-      formLoading={isLoading}
+      formLoading={isSubmitting}
       handleSubmit={handleSubmit}
       handleImageChange={handleImageChange}
       onFinishHandler={onFinishHandler}

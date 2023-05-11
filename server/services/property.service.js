@@ -23,3 +23,7 @@ exports.deletePropertyByIdService = async (id) => {
   const response = await Property.deleteOne({ _id: id });
   return response;
 };
+exports.updatePropertyByIdService = async (id, updatedProperty) => {
+  const response = await Property.updateOne({ _id: id }, updatedProperty);
+  return response;
+};

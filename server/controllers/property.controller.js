@@ -6,6 +6,7 @@ const {
   getAllPropertyService,
   getPropertyDetailsService,
   deletePropertyByIdService,
+  updatePropertyByIdService,
 } = require("../services/property.service");
 
 const cloudinary = require("cloudinary").v2;
@@ -144,7 +145,29 @@ exports.createProperty = async (req, res) => {
     res.status(500).json({ status: "fail", message: error.message });
   }
 };
-exports.updateProperty = async (req, res) => {};
+exports.updateProperty = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { photo } = req.body;
+    if (photo) {
+      // uploading updated property image to cloudinary
+      const photoUrl = await cloudinary.uploader.upload(photo);
+      req.body.photo = photoUrl.url;
+    }
+    const updatedField = {
+      ...req.body,
+    };
+
+    const response = await updatePropertyByIdService(id, req.body);
+    if (response) {
+      res
+        .status(200)
+        .json({ status: "success", message: "Property updated successfully" });
+    }
+  } catch (error) {
+    res.status(500).json({ status: "fail", message: error.message });
+  }
+};
 exports.deleteProperty = async (req, res) => {
   try {
     const { id } = req.params;

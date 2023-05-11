@@ -39,9 +39,6 @@ const PropertyDetails = () => {
   const isCurrentUser = true;
 
   const handleDeleteProperty = async (id: string | undefined) => {
-    // const response = confirm("Are you sure you want to delete this property?");
-    // if (response) {
-    // }
     const response = window.confirm(
       "Are you sure you want to delete this property?"
     );
@@ -62,7 +59,7 @@ const PropertyDetails = () => {
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <IconButton
           onClick={() => {
-            window.history.back();
+            navigate("/properties");
           }}
         >
           <ArrowBack color="action"></ArrowBack>
@@ -225,7 +222,9 @@ const PropertyDetails = () => {
                 icon={!isCurrentUser ? <ChatBubble /> : <Edit />}
                 handleClick={() => {
                   if (isCurrentUser) {
-                    navigate(`/properties/edit/${propertyDetails._id}`);
+                    navigate(`/properties/edit/${propertyDetails._id}`, {
+                      state: { propertyDetails: propertyDetails },
+                    });
                   }
                 }}
               />
