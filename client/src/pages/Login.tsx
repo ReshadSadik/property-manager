@@ -1,4 +1,3 @@
-import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -16,13 +15,13 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../shared/hooks/useAuth";
 import { axiosOpen } from "../services/api/axios";
 
-type loginType = {
+interface loginType {
   email: string;
   password: string;
-};
+}
 
 const Login = () => {
-  const { setAuthToken } = useAuth();
+  const { setAuthToken, setUserDetails } = useAuth();
   const navigate = useNavigate();
   const {
     register,
@@ -39,10 +38,11 @@ const Login = () => {
       const user = await response.data.data;
 
       if (user) {
-        localStorage.authToken = JSON.stringify(user.token);
         localStorage.userDetails = JSON.stringify(user.user);
+        setUserDetails(user.user);
       }
       if (user.token) {
+        localStorage.authToken = JSON.stringify(user.token);
         setAuthToken(user.token);
         navigate("/", { replace: true });
       }

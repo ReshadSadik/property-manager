@@ -2,7 +2,7 @@ export const ALL_ROUTES = {
   LOGIN: `/login`,
   HOME: "/",
   PROPERTIES: "/properties",
-  AGENTS: "/agrnts",
+  AGENTS: "/agents",
   REVIEWS: "/reviews",
   MESSAGES: "/messages",
   MY_PROFILE: "/my-profile",

@@ -6,6 +6,7 @@ export interface CustomButtonProps {
   fullWidth?: boolean;
   icon?: ReactNode;
   disabled?: boolean;
+  sx?: any;
   handleClick?: () => void;
 }
 export interface ProfileProps {

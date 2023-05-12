@@ -11,7 +11,7 @@ import {
   AllProperties,
   // MyProfile,
   // AgentProfile,
-  // Agents,
+  Agents,
   CreateProperty,
   EditProperty,
   PropertyDetails,
@@ -42,6 +42,7 @@ function App() {
                 path={`${ALL_ROUTES.PROPERTIES}/view/:id`}
                 element={<PropertyDetails />}
               ></Route>
+              <Route path={ALL_ROUTES.AGENTS} element={<Agents />}></Route>
               <Route index element={<Dashboard />}></Route>
             </Route>
           </Route>

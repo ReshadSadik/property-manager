@@ -17,7 +17,7 @@ import { CustomButton } from "../../components";
 
 const PropertyDetails = () => {
   const navigate = useNavigate();
-  // const {  } = useAuth();
+  const { userDetails } = useAuth();
 
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
@@ -34,9 +34,8 @@ const PropertyDetails = () => {
     })();
   }, []);
 
-  //   const isCurrentUser = user.email === propertyDetails.creator.email;
-
-  const isCurrentUser = true;
+  const isCurrentUser =
+    userDetails?.email === propertyDetails?.creator?.id?.email;
 
   const handleDeleteProperty = async (id: string | undefined) => {
     const response = window.confirm(
@@ -225,6 +224,10 @@ const PropertyDetails = () => {
                     navigate(`/properties/edit/${propertyDetails._id}`, {
                       state: { propertyDetails: propertyDetails },
                     });
+                  } else {
+                    (() => {
+                      window.location.href = `mailto:${propertyDetails?.creator?.id?.email}`;
+                    })();
                   }
                 }}
               />
@@ -235,7 +238,13 @@ const PropertyDetails = () => {
                 fullWidth
                 icon={!isCurrentUser ? <Phone /> : <Delete />}
                 handleClick={() => {
-                  if (isCurrentUser) handleDeleteProperty(id);
+                  if (isCurrentUser) {
+                    handleDeleteProperty(id);
+                  } else {
+                    (() => {
+                      window.location.href = `tel:"+8801768111368"`;
+                    })();
+                  }
                 }}
               />
             </Stack>

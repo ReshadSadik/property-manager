@@ -45,11 +45,12 @@ const Drawer = styled(MuiDrawer, {
 }));
 const DrawerLarge = ({ open, toggleDrawerLarge, sidebarList, state }: any) => {
   const theme = useTheme();
-  const { setAuthToken } = useAuth();
+  const { setAuthToken, setUserDetails } = useAuth();
   const signOut = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("userDetails");
     setAuthToken(undefined);
+    setUserDetails(undefined);
   };
   const handleNavMenu = (title: string) => {
     if (title === "SignOut") {

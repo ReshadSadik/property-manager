@@ -11,6 +11,7 @@ const CustomButton = ({
   icon,
   handleClick,
   disabled,
+  sx,
 }: CustomButtonProps) => {
   return (
     <Button
@@ -32,6 +33,7 @@ const CustomButton = ({
           opacity: 0.9,
           backgroundColor,
         },
+        ...sx,
       }}
       onClick={handleClick}
     >

@@ -11,16 +11,12 @@ import IconButton from "@mui/material/IconButton";
 import { DrawerSmall } from "../../components";
 import { NotificationsOutlined } from "@mui/icons-material";
 import { Avatar, Menu, MenuItem, Stack, Tooltip } from "@mui/material";
+import { useAuth } from "../../shared/hooks/useAuth";
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
-type userDetailsType = {
-  name: string;
-  email: string;
-  role: string;
-};
 
 const drawerWidth = 250;
 const AppBar = styled(MuiAppBar, {
@@ -42,10 +38,12 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 const Header = ({ open, toggleDrawerLarge, sidebarList }: any) => {
+  const theme = useTheme();
+  const { userDetails } = useAuth();
+  const [state, setState] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
-  const [userDetails, setUserDetails] = React.useState<userDetailsType>();
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -55,22 +53,6 @@ const Header = ({ open, toggleDrawerLarge, sidebarList }: any) => {
     setAnchorElUser(null);
   };
 
-  // const getUserDetails = () => {
-  //   return (
-  //     (localStorage.getItem("userDetails") &&
-  //       JSON.parse(localStorage.getItem("userDetails")!)) ||
-  //     {}
-  //   );
-  // };
-
-  React.useEffect(() => {
-    console.log("working");
-    setUserDetails(JSON.parse(localStorage.getItem("userDetails")!));
-  }, []);
-  console.log(userDetails);
-
-  const theme = useTheme();
-  const [state, setState] = React.useState(false);
   const toggleDrawerSmall = (open: boolean) => {
     setState(open);
   };
@@ -134,25 +116,23 @@ const Header = ({ open, toggleDrawerLarge, sidebarList }: any) => {
         </IconButton>
         <Stack sx={{ padding: "0 20px" }} direction="column">
           <Typography
+            variant="body1"
             sx={{
-              fontSize: "14px",
-              fontWeight: 600,
-              color: "#11142D",
+              fontWeight: 700,
               textAlign: "right",
+              textTransform: "capitalize",
             }}
           >
             {userDetails?.name}
           </Typography>
           <Typography
+            variant="body2"
             sx={{
-              fontSize: "14px",
-              fontWeight: 400,
-              color: "#808191 ",
               textAlign: "right",
+              textTransform: "capitalize",
             }}
           >
-            {/* {userDetails?.role} */}
-            Company Manager
+            {userDetails?.role}
           </Typography>
         </Stack>
         <Box
@@ -164,10 +144,7 @@ const Header = ({ open, toggleDrawerLarge, sidebarList }: any) => {
         >
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar
-                alt="Remy Sharp"
-                src="https://media.licdn.com/dms/image/C4D03AQHXjwV7bPfPtw/profile-displayphoto-shrink_800_800/0/1648570818590?e=2147483647&v=beta&t=YvJKpJ7sSehYyXFP-6trEczbrYDNkSucA3g99oCR2f8"
-              />
+              <Avatar alt="Remy Sharp" src={userDetails?.avatar} />
             </IconButton>
           </Tooltip>
           <Menu

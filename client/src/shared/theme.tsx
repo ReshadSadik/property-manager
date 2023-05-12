@@ -4,7 +4,7 @@ export const defaultTheme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
-      sm: 320,
+      sm: 450,
       md: 750,
       lg: 1025,
       xl: 1280,

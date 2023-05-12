@@ -46,8 +46,8 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["buyer", "property-manager", "admin"],
-      default: "buyer",
+      enum: ["agent", "manager", "admin"],
+      default: "agent",
     },
     status: {
       type: String,
