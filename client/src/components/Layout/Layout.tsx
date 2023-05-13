@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { Outlet } from "react-router-dom";
 import QrCodeIcon from "@mui/icons-material/QrCode";
 import {
@@ -21,10 +22,14 @@ const sidebarList = [
   { title: "Dashboard", link: "", icon: QrCodeIcon },
   { title: "Properties", link: ALL_ROUTES.PROPERTIES, icon: VillaOutlined },
   { title: "Agents", link: ALL_ROUTES.AGENTS, icon: PeopleAltOutlined },
-  { title: "Reviews", link: "barcode", icon: StarOutlineRounded },
-  { title: "Messages", link: "category", icon: ChatBubbleOutline },
-  { title: "My Profile", link: "brand", icon: AccountCircleOutlined },
-  { title: "SignOut", link: "/login", icon: AccountCircleIcon },
+  { title: "Reviews", link: ALL_ROUTES.REVIEWS, icon: StarOutlineRounded },
+  { title: "Messages", link: ALL_ROUTES.MESSAGES, icon: ChatBubbleOutline },
+  {
+    title: "My Profile",
+    link: ALL_ROUTES.MY_PROFILE,
+    icon: AccountCircleOutlined,
+  },
+  { title: "Sign out", link: "/login", icon: LogoutOutlinedIcon },
 ];
 
 export function DashboardContainer() {

@@ -3,7 +3,14 @@ import { Box, Typography, Stack } from "@mui/material";
 
 import { PieChartProps } from "../../interfaces/home";
 
-const PieChart = ({ title, value, series, colors }: PieChartProps) => {
+const PieChart = ({
+  title,
+  value,
+  series,
+  colors,
+  sx,
+  padding,
+}: PieChartProps) => {
   return (
     <Box
       id="chart"
@@ -19,8 +26,14 @@ const PieChart = ({ title, value, series, colors }: PieChartProps) => {
       borderRadius="15px"
       minHeight="110px"
       width="fit-content"
+      sx={{ ...sx }}
     >
-      <Stack direction="column">
+      <Stack
+        direction="column"
+        textAlign="left"
+        marginBottom={1}
+        paddingLeft={padding}
+      >
         <Typography fontSize={14} color="#808191">
           {title}
         </Typography>

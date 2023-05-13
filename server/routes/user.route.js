@@ -9,6 +9,6 @@ router
   .post(userController.createUser);
 router.post("/signup", userController.signUp);
 router.post("/login", userController.login);
-router.route("/:id").get(userController.getUserByID);
+router.route("/:id").get(userController.getAgentByID);
 
 module.exports = router;

@@ -1,14 +1,18 @@
 const User = require("../models/User");
 
 exports.getAllAgentService = async () => {
-  const users = await User.find({});
-  return users;
+  const agents = await User.find({});
+  return agents;
 };
-exports.signUpService = async (userInfo) => {
-  const user = await User.create(userInfo);
-  return user;
+exports.getAgentByIdService = async (id) => {
+  const agent = await User.findOne({ _id: id }).populate("allProperties");
+  return agent;
 };
-exports.findUserByEmail = async (userEmail) => {
-  const user = await User.findOne({ email: userEmail });
-  return user;
+exports.signUpService = async (agentInfo) => {
+  const agent = await User.create(agentInfo);
+  return agent;
+};
+exports.findUserByEmail = async (agentEmail) => {
+  const agent = await User.findOne({ email: agentEmail });
+  return agent;
 };

@@ -26,6 +26,8 @@ const PropertyCard = ({
   loading,
 }: PropertyCardProps) => {
   const theme = useTheme();
+  console.log(title);
+
   return (
     <Card
       component={Link}

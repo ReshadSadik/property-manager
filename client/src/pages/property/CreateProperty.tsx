@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const CreateProperty = () => {
   const navigate = useNavigate();
+  const { userDetails } = useAuth();
 
   const [propertyImage, setPropertyImage] = useState({ name: "", url: "" });
   const {
@@ -29,19 +30,18 @@ const CreateProperty = () => {
       setPropertyImage({ name: file?.name, url: result })
     );
   };
-  console.log(propertyImage);
 
   const onFinishHandler = async (data: FieldValues) => {
     if (!propertyImage.name) return alert("Please select an image");
     const propertyObject = {
       ...data,
       photo: propertyImage.url,
-      email: "reshadsadik@gmail.com",
+      email: userDetails?.email,
     };
     try {
       const response = await axiosOpen.post("properties", propertyObject);
       if (response.status === 200) {
-        window.alert("property updated successfully");
+        window.alert("property created successfully");
         navigate("/properties");
       }
     } catch (error) {}

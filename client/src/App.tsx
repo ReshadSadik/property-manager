@@ -9,8 +9,8 @@ import {
   Login,
   NotFound,
   AllProperties,
-  // MyProfile,
-  // AgentProfile,
+  MyProfile,
+  AgentProfile,
   Agents,
   CreateProperty,
   EditProperty,
@@ -41,6 +41,15 @@ function App() {
               <Route
                 path={`${ALL_ROUTES.PROPERTIES}/view/:id`}
                 element={<PropertyDetails />}
+              ></Route>
+              <Route path={ALL_ROUTES.AGENTS} element={<Agents />}></Route>
+              <Route
+                path={`${ALL_ROUTES.AGENTS}/view/:id`}
+                element={<AgentProfile />}
+              ></Route>
+              <Route
+                path={`${ALL_ROUTES.MY_PROFILE}`}
+                element={<MyProfile />}
               ></Route>
               <Route path={ALL_ROUTES.AGENTS} element={<Agents />}></Route>
               <Route index element={<Dashboard />}></Route>

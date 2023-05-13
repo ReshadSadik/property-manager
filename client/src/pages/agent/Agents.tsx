@@ -40,12 +40,12 @@ const Agents = () => {
         {memoizedAgents.map((agent: any) => (
           <AgentCard
             key={agent._id}
-            id={agent._id}
+            _id={agent._id}
             name={agent.name}
             email={agent.email}
             avatar={agent.avatar}
             role={agent.role}
-            noOfProperties={agent.allProperties.length}
+            allProperties={agent.allProperties}
           />
         ))}
       </Box>

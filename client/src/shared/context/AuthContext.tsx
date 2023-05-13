@@ -16,11 +16,11 @@ export const AuthContext = createContext<AuthContextProps>({
   error: "",
   setError: () => {},
   userDetails: {
-    id: undefined,
+    _id: undefined,
     name: "",
     email: "",
     avatar: "",
-    noOfProperties: 0,
+    allProperties: [],
     role: "",
     status: undefined,
   },

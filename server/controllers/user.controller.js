@@ -2,6 +2,7 @@ const {
   signUpService,
   findUserByEmail,
   getAllAgentService,
+  getAgentByIdService,
 } = require("../services/user.service");
 const { generateToken } = require("../utils/token");
 
@@ -20,7 +21,21 @@ exports.getAllAgents = async (req, res) => {
   }
 };
 exports.createUser = async (req, res) => {};
-exports.getUserByID = async (req, res) => {};
+exports.getAgentByID = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const agent = await getAgentByIdService(id);
+    res.status(200).json({
+      status: "success",
+      agent: agent,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "fail",
+      error,
+    });
+  }
+};
 exports.signUp = async (req, res) => {
   try {
     const user = await signUpService(req.body);

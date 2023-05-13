@@ -20,20 +20,19 @@ const InfoBar = ({ icon, name }: InfoBarProps) => (
 );
 
 const AgentCard = ({
-  id,
+  _id,
   name,
   email,
   avatar,
-  noOfProperties,
+  allProperties,
   role,
 }: AgentCardProp) => {
   const theme = useTheme();
   const { userDetails } = useAuth();
   const generateLink = () => {
-    // if (currentUser.email === email) return "/my-profile";
-    if (true) return "/my-profile";
+    if (userDetails?.email === email) return "/my-profile";
 
-    return `/agents/show/${id}`;
+    return `/agents/view/${_id}`;
   };
 
   const handleManager = () => {};
@@ -123,7 +122,7 @@ const AgentCard = ({
                   sx={{ color: theme.palette.text.secondary, fontSize: "17px" }}
                 />
               }
-              name={`${noOfProperties} Properties`}
+              name={`${allProperties?.length} Properties`}
             />
           </Stack>
           <Stack
