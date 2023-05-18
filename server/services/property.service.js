@@ -16,7 +16,21 @@ exports.createPropertyService = async (propertyDetails) => {
   return response;
 };
 exports.getPropertyDetailsService = async (id) => {
-  const response = await Property.find({ _id: id }).populate("creator.id");
+  const response = await Property.find({ _id: id })
+    .populate("creator.id")
+    .populate({
+      path: "creator.id",
+      select: "-password -email -status",
+    })
+    .populate({
+      path: "reviews",
+      match: { status: "approved" },
+      populate: {
+        path: "creator.id",
+        select: "name avatar",
+      },
+    })
+    .exec();
   return response;
 };
 exports.deletePropertyByIdService = async (id) => {

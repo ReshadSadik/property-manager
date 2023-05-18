@@ -7,6 +7,7 @@ const PropertySchema = new mongoose.Schema({
   location: { type: String, required: true },
   price: { type: Number, required: true },
   photo: { type: String, required: true },
+  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
   creator: {
     name: String,
     id: {

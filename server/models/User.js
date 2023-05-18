@@ -59,6 +59,7 @@ const userSchema = new mongoose.Schema(
       validate: [validator.isURL, "Please provide a valid url"],
     },
     allProperties: [{ type: mongoose.Schema.Types.ObjectId, ref: "Property" }],
+    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
   },
   {
     timestamps: true,

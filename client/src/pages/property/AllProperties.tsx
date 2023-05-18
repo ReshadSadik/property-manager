@@ -1,13 +1,5 @@
 import { Add } from "@mui/icons-material";
-import {
-  Box,
-  Stack,
-  Typography,
-  TextField,
-  Select,
-  MenuItem,
-  Pagination,
-} from "@mui/material";
+import { Box, Stack, Typography, Pagination } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 
@@ -68,12 +60,11 @@ const AllProperties = () => {
   return (
     <Box>
       <Box
-        mt="20px"
         sx={{
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "space-between",
-          alignItems: "center",
+          alignItems: "flex-start",
           gap: 3,
         }}
       >
@@ -181,7 +172,6 @@ const AllProperties = () => {
             backgroundColor: "#fcfcfc",
             height: "auto",
             borderRadius: "15px",
-            padding: "10px",
             display: "grid",
             gridGap: "10px",
             gridTemplateColumns: {

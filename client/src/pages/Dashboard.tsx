@@ -13,9 +13,7 @@ const Dashboard = () => {
   const theme = useTheme();
   return (
     <Box>
-      <Typography fontSize={25} fontWeight={700} color="#11142D">
-        Dashboard
-      </Typography>
+      <Typography variant="h1">Dashboard</Typography>
 
       <Box mt="20px" display="flex" flexWrap="wrap" gap={4}>
         <PieChart

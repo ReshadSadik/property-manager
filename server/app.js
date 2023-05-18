@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const userRouter = require("./routes/user.route.js");
+const userRouter = require("./routes/user.route");
 const propertyRouter = require("./routes/property.route");
+const reviewRouter = require("./routes/review.route");
 
 //middlewares
 app.use(cors());
@@ -14,5 +15,6 @@ app.get("/", (req, res) => {
 });
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/properties", propertyRouter);
+app.use("/api/v1/reviews", reviewRouter);
 
 module.exports = app;

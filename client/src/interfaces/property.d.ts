@@ -1,4 +1,5 @@
 import { AgentCardProp } from "./agent";
+import { ReviewProps } from "./review";
 export interface FormFieldProp {
   title: string;
   labelName: string;
@@ -32,4 +33,5 @@ export interface PropertyProps {
     name: string;
     id: AgentCardProp;
   };
+  reviews: [ReviewProps];
 }

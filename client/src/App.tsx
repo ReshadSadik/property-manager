@@ -16,6 +16,7 @@ import {
   EditProperty,
   PropertyDetails,
 } from "./pages";
+import Reviews from "./pages/Reviews";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
                 element={<MyProfile />}
               ></Route>
               <Route path={ALL_ROUTES.AGENTS} element={<Agents />}></Route>
+              <Route path={ALL_ROUTES.REVIEWS} element={<Reviews />}></Route>
               <Route index element={<Dashboard />}></Route>
             </Route>
           </Route>

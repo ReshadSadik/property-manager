@@ -33,8 +33,9 @@ const PropertyCard = ({
       component={Link}
       to={`/properties/view/${_id}`}
       sx={{
-        padding: "10px",
+        padding: "20px",
         display: "grid",
+        borderRadius: "10px",
         gridTemplateColumns: {
           lg: "220px auto",
           sm: "150px auto",
