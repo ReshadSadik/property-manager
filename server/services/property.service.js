@@ -1,4 +1,4 @@
-const Property = require("../models/Property");
+const Property = require("../models/Property.js");
 
 exports.getAllPropertyService = async (filters, queries) => {
   const allProperties = await Property.find(filters)
