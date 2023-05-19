@@ -1,5 +1,5 @@
 const User = require("../models/User");
-const Property = require("../models/Property");
+// const Property = require("../models/Property");
 const mongoose = require("mongoose");
 
 const {
@@ -33,7 +33,7 @@ exports.createReview = async (req, res) => {
     const user = await User.findOne({ email }).session(session);
     // if (!user) throw new Error("User not found");
     // get property
-    const property = await Property.findOne({ _id: id }).session(session);
+    // const property = await Property.findOne({ _id: id }).session(session);
     // if (!property) throw new Error("property not found");
 
     const newReview = await createReviewService({
@@ -44,15 +44,15 @@ exports.createReview = async (req, res) => {
         name: user?.name,
         id: user?._id,
       },
-      property: id,
+      // property: id,
     });
 
     // saving the review under the user
     user.reviews.push(newReview._id);
     await user.save({ session });
     // saving the PROPERTY with newly created review
-    property.reviews.push(newReview._id);
-    await property.save({ session });
+    // property.reviews.push(newReview._id);
+    // await property.save({ session });
 
     // end session
     await session.commitTransaction();
