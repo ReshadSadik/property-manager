@@ -1,12 +1,12 @@
 const User = require("../models/User");
 const mongoose = require("mongoose");
-const {
-  createPropertyService,
-  getAllPropertyService,
-  getPropertyDetailsService,
-  deletePropertyByIdService,
-  updatePropertyByIdService,
-} = require("../services/property.service");
+// const {
+//   createPropertyService,
+//   getAllPropertyService,
+//   getPropertyDetailsService,
+//   deletePropertyByIdService,
+//   updatePropertyByIdService,
+// } = require("../services/property.service");
 
 const cloudinary = require("cloudinary").v2;
 
@@ -57,11 +57,11 @@ exports.getAllProperties = async (req, res) => {
       queries.limit = parseInt(limit);
     }
 
-    const allProperties = await getAllPropertyService(filters, queries);
+    // const allProperties = await getAllPropertyService(filters, queries);
 
     res.status(200).json({
       status: "success",
-      data: allProperties,
+      // data: allProperties,
     });
   } catch (error) {
     res.status(400).json({
@@ -74,7 +74,9 @@ exports.getAllProperties = async (req, res) => {
 exports.getPropertyDetail = async (req, res) => {
   const { id } = req.params;
   try {
-    const propertyDetails = await getPropertyDetailsService(id);
+    // const propertyDetails = await getPropertyDetailsService(id);
+    const propertyDetails = true;
+
     if (!propertyDetails) {
       // return throw error
     }
@@ -106,21 +108,21 @@ exports.createProperty = async (req, res) => {
     // uploading property image to cloudinary
     const photoUrl = await cloudinary.uploader.upload(photo);
 
-    const newProperty = await createPropertyService({
-      title,
-      description,
-      propertyType,
-      location,
-      price,
-      photo: photoUrl.url,
-      creator: {
-        name: user.name,
-        id: user._id,
-      },
-    });
+    // const newProperty = await createPropertyService({
+    //   title,
+    //   description,
+    //   propertyType,
+    //   location,
+    //   price,
+    //   photo: photoUrl.url,
+    //   creator: {
+    //     name: user.name,
+    //     id: user._id,
+    //   },
+    // });
 
-    // saving the user with newly created property
-    user.allProperties.push(newProperty._id);
+    // // saving the user with newly created property
+    // user.allProperties.push(newProperty._id);
     await user.save({ session });
 
     // end session
@@ -143,7 +145,8 @@ exports.updateProperty = async (req, res) => {
       req.body.photo = photoUrl.url;
     }
 
-    const response = await updatePropertyByIdService(id, req.body);
+    // const response = await updatePropertyByIdService(id, req.body);
+    const response = true;
     if (response) {
       res
         .status(200)
@@ -156,7 +159,9 @@ exports.updateProperty = async (req, res) => {
 exports.deleteProperty = async (req, res) => {
   try {
     const { id } = req.params;
-    const response = await deletePropertyByIdService(id);
+    // const response = await deletePropertyByIdService(id);
+    const response = true;
+
     if (response.deletedCount > 0) {
       res
         .status(200)
