@@ -2,7 +2,6 @@ import { Add } from "@mui/icons-material";
 import { Box, Stack, Typography, Pagination } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
-
 import { PropertyCard, CustomButton } from "../../components";
 import { axiosOpen } from "../../services/api/axios";
 import { PropertyCardProps } from "../../interfaces/property";

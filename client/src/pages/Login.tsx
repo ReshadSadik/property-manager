@@ -14,22 +14,27 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../shared/hooks/useAuth";
 import { axiosOpen } from "../services/api/axios";
+import { CircularProgress } from "@mui/material";
+import { green } from "@mui/material/colors";
+import { toast } from "react-toastify";
+import ReactToastify from "../components/common/ReactToastify";
 
 interface loginType {
   email: string;
   password: string;
 }
-
 const Login = () => {
-  const { setAuthToken, setUserDetails } = useAuth();
+  const { setAuthToken, setUserDetails, error, setError } = useAuth();
+
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<loginType>();
 
   const onFormSubmit: SubmitHandler<loginType> = async (data) => {
+    setError("");
     try {
       const response = await axiosOpen.post("users/login", {
         email: data.email,
@@ -46,7 +51,13 @@ const Login = () => {
         setAuthToken(user.token);
         navigate("/", { replace: true });
       }
-    } catch (error) {}
+    } catch (error: any) {
+      if (error?.code == "ERR_NETWORK") {
+        toast.error(error?.message);
+      } else {
+        setError(error?.response?.data?.error);
+      }
+    }
   };
   return (
     <Container component="main" maxWidth="xs">
@@ -98,33 +109,55 @@ const Login = () => {
             helperText={errors.password ? `password is required` : ""}
             {...register("password", { required: true })}
           />
+          {error ? <Typography sx={{ color: "red" }}>{error}</Typography> : ""}
           <FormControlLabel
             sx={{ textAlign: "left", width: "100%" }}
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
+
+          <Box sx={{ m: 0, position: "relative" }}>
+            <Box>
+              <Button
+                sx={{ marginBottom: 2 }}
+                disabled={isSubmitting}
+                type="submit"
+                fullWidth
+                variant="contained"
+              >
+                Sign In
+              </Button>
+              {isSubmitting && (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    color: green[500],
+                    position: "absolute",
+                    top: "26%",
+                    left: "50%",
+                    marginTop: "-12px",
+                    marginLeft: "-12px",
+                  }}
+                />
+              )}
+            </Box>
+
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="#" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
+          </Box>
         </Box>
       </Box>
+      <ReactToastify />
     </Container>
   );
 };

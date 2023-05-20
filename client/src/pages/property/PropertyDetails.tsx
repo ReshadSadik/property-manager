@@ -1,4 +1,11 @@
-import { Typography, Box, Stack, IconButton, Skeleton } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Stack,
+  IconButton,
+  Skeleton,
+  Rating,
+} from "@mui/material";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   ArrowBack,
@@ -111,11 +118,7 @@ const PropertyDetails = () => {
                 <Typography variant="h5" textTransform="capitalize">
                   {propertyDetails?.propertyType}
                 </Typography>
-                <Box>
-                  {[1, 2, 3, 4, 5].map((item) => (
-                    <Star key={`star-${item}`} sx={{ color: "#F2C94C" }} />
-                  ))}
-                </Box>
+                <Rating readOnly name="size-large" defaultValue={5} />
               </Stack>
 
               <Stack

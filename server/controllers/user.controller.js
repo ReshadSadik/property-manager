@@ -74,7 +74,7 @@ exports.login = async (req, res) => {
     if (!isPasswordValid) {
       return res.status(403).json({
         status: "fail",
-        error: "Password is not correct",
+        error: "email or password is incorrect",
       });
     }
 

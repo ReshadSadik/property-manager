@@ -3,7 +3,8 @@ import { FieldValues, useForm } from "react-hook-form";
 import Form from "../../components/common/Form";
 import { axiosOpen } from "../../services/api/axios";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-
+import { toast } from "react-toastify";
+import ReactToastify from "../../components/common/ReactToastify";
 const EditProperty = () => {
   const { state } = useLocation();
   const { propertyDetails } = state; // Read values passed on state
@@ -24,7 +25,6 @@ const EditProperty = () => {
     name: propertyDetails.photo,
     url: "",
   });
-  console.log(isSubmitting);
 
   // get url of uploaded image
   const handleImageChange = (file: File) => {
@@ -60,22 +60,26 @@ const EditProperty = () => {
         propertyObject
       );
       if (response.status === 200) {
-        window.alert("property updated successfully");
+        toast.success("property updated successfully");
+
         navigate(`/properties/view/${id}`);
       }
     } catch (error) {}
   };
 
   return (
-    <Form
-      type="Edit"
-      register={register}
-      formLoading={isSubmitting}
-      handleSubmit={handleSubmit}
-      handleImageChange={handleImageChange}
-      onFinishHandler={onFinishHandler}
-      propertyImage={propertyImage}
-    />
+    <div>
+      <Form
+        type="Edit"
+        register={register}
+        formLoading={isSubmitting}
+        handleSubmit={handleSubmit}
+        handleImageChange={handleImageChange}
+        onFinishHandler={onFinishHandler}
+        propertyImage={propertyImage}
+      />
+      <ReactToastify />
+    </div>
   );
 };
 export default EditProperty;
