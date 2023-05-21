@@ -20,7 +20,7 @@ exports.getPropertyDetailsService = async (id) => {
     .populate("creator.id")
     .populate({
       path: "creator.id",
-      select: "-password -email -status",
+      select: "-password -reviews -status",
     })
     .populate({
       path: "reviews",
