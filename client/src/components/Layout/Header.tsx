@@ -39,7 +39,7 @@ const AppBar = styled(MuiAppBar, {
 
 const Header = ({ open, toggleDrawerLarge, sidebarList }: any) => {
   const theme = useTheme();
-  const { userDetails } = useAuth();
+  const { userDetails, setUserDetails } = useAuth();
   const [state, setState] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
@@ -56,6 +56,15 @@ const Header = ({ open, toggleDrawerLarge, sidebarList }: any) => {
   const toggleDrawerSmall = (open: boolean) => {
     setState(open);
   };
+
+  React.useEffect(() => {
+    // Load state from local storage if available
+    const savedUserDetailsState = localStorage.getItem("userDetails");
+    if (savedUserDetailsState) {
+      setUserDetails(JSON.parse(savedUserDetailsState));
+    }
+  }, []);
+
   return (
     <AppBar
       elevation={0}

@@ -25,6 +25,7 @@ import { PropertyProps } from "../../interfaces/property.d";
 import Review from "../../components/Review";
 import { ReviewProps } from "../../interfaces/review";
 import ReviewForm from "../../components/property/ReviewForm";
+import ReactToastify from "../../components/common/ReactToastify";
 
 const PropertyDetails = () => {
   const navigate = useNavigate();
@@ -32,7 +33,6 @@ const PropertyDetails = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [propertyDetails, setPropertyDetails] = useState<PropertyProps>();
-  console.log(propertyDetails);
   useEffect(() => {
     (async () => {
       setLoading(true);
@@ -319,6 +319,7 @@ const PropertyDetails = () => {
           </Box>
         </Box>
       </Box>
+      <ReactToastify />
     </Box>
   );
 };

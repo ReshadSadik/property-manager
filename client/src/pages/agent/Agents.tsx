@@ -2,7 +2,8 @@ import { Box, Typography } from "@mui/material";
 
 import { AgentCard } from "../../components";
 import { useEffect, useMemo, useState } from "react";
-import { axiosOpen } from "../../services/api/axios";
+import { axiosSecure } from "../../services/api/axios";
+import { AgentCardProp } from "../../interfaces/agent";
 
 const Agents = () => {
   const [loading, setLoading] = useState(true);
@@ -11,10 +12,17 @@ const Agents = () => {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const response = await axiosOpen.get("/users");
-      if (response.status == 200) {
-        setAgents(response?.data.agents);
-        setLoading(false);
+      try {
+        const response = await axiosSecure.get("/users");
+        if (response.status == 401) {
+          window.alert("you are not authorized");
+        }
+        if (response.status == 200) {
+          setAgents(response?.data.agents);
+          setLoading(false);
+        }
+      } catch (error: any) {
+        window.alert(error.response.data.message);
       }
     })();
   }, []);
@@ -35,7 +43,7 @@ const Agents = () => {
           backgroundColor: "#fcfcfc",
         }}
       >
-        {memoizedAgents.map((agent: any) => (
+        {memoizedAgents.map((agent: AgentCardProp) => (
           <AgentCard
             key={agent._id}
             _id={agent._id}
@@ -43,6 +51,7 @@ const Agents = () => {
             email={agent.email}
             avatar={agent.avatar}
             role={agent.role}
+            reviews={agent.reviews}
             allProperties={agent.allProperties}
           />
         ))}

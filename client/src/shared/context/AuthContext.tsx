@@ -20,6 +20,7 @@ export const AuthContext = createContext<AuthContextProps>({
     name: "",
     email: "",
     avatar: "",
+    reviews: [],
     allProperties: [],
     role: "",
     status: undefined,

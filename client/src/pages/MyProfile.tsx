@@ -12,6 +12,7 @@ const MyProfile = () => {
     email: "",
     avatar: "",
     role: "",
+    reviews: [],
     allProperties: [],
   });
   useEffect(() => {
@@ -34,6 +35,7 @@ const MyProfile = () => {
       role={myDetails?.role}
       email={myDetails.email}
       avatar={myDetails.avatar}
+      reviews={myDetails?.reviews}
       properties={myDetails?.allProperties}
     />
   );

@@ -4,7 +4,9 @@ import { useAuth } from "../shared/hooks/useAuth";
 
 export const ProtectedRoute = () => {
   const { authToken } = useAuth();
-  if (!authToken) {
+  const web = localStorage.authToken && JSON.parse(localStorage.authToken);
+
+  if (!web) {
     return <Navigate to={ALL_ROUTES.LOGIN} />;
   }
   return <Outlet></Outlet>;

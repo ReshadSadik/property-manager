@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import Form from "../../components/common/Form";
-import { axiosOpen } from "../../services/api/axios";
+import Form from "../../components/common/PropertyForm";
+import { axiosOpen, axiosSecure } from "../../services/api/axios";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
-import ReactToastify from "../../components/common/ReactToastify";
+
 const EditProperty = () => {
   const { state } = useLocation();
   const { propertyDetails } = state; // Read values passed on state
@@ -12,7 +11,7 @@ const EditProperty = () => {
   const navigate = useNavigate();
 
   const {
-    formState: { isLoading, isSubmitting },
+    formState: { isSubmitting },
     register,
     handleSubmit,
     watch,
@@ -55,31 +54,29 @@ const EditProperty = () => {
       photo: propertyImage.url ? propertyImage.url : undefined,
     };
     try {
-      const response = await axiosOpen.patch(
+      const response = await axiosSecure.patch(
         `/properties/${id}`,
         propertyObject
       );
       if (response.status === 200) {
-        toast.success("property updated successfully");
-
+        window.alert("property updated successfully");
         navigate(`/properties/view/${id}`);
       }
-    } catch (error) {}
+    } catch (error) {
+      window.alert(error);
+    }
   };
 
   return (
-    <div>
-      <Form
-        type="Edit"
-        register={register}
-        formLoading={isSubmitting}
-        handleSubmit={handleSubmit}
-        handleImageChange={handleImageChange}
-        onFinishHandler={onFinishHandler}
-        propertyImage={propertyImage}
-      />
-      <ReactToastify />
-    </div>
+    <Form
+      type="Edit"
+      register={register}
+      formLoading={isSubmitting}
+      handleSubmit={handleSubmit}
+      handleImageChange={handleImageChange}
+      onFinishHandler={onFinishHandler}
+      propertyImage={propertyImage}
+    />
   );
 };
 export default EditProperty;

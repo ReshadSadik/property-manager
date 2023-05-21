@@ -17,9 +17,10 @@ export interface ProfileProps {
   email: string;
   role: string;
   properties: Array | undefined;
+  reviews: Array | undefined;
 }
 
-export interface FormProps {
+export interface PropertyFormProps {
   type: string;
   register: any;
   formLoading: boolean;

@@ -29,6 +29,7 @@ const MyProfileComponent = ({
   properties,
   loading,
   role,
+  reviews,
 }: ProfileProps) => {
   const navigate = useNavigate();
 
@@ -72,15 +73,15 @@ const MyProfileComponent = ({
               >
                 <PieChart
                   title="Total Listings"
-                  value={1050}
-                  series={[55, 45]}
+                  value={properties?.length}
+                  series={[properties?.length, 45]}
                   colors={["#FE6D8E", "#E4E8EF"]}
                   sx={{ width: "auto" }}
                   padding={4}
                 />
                 <PieChart
-                  title="Properties Sold"
-                  value={650}
+                  title="Properties Review"
+                  value={reviews?.length}
                   series={[60, 40]}
                   colors={["#c4e8ef", "#2ED480"]}
                   sx={{ width: "auto" }}
@@ -101,11 +102,12 @@ const MyProfileComponent = ({
           {/* details section */}
           {loading ? (
             <Box
-              height={488}
+              height={520}
               display="flex"
               flexDirection="column"
               sx={{ pt: 2, pl: 2 }}
-              gap={5}
+              gap={10}
+              justifyContent="space-between"
             >
               <Skeleton width="10%" />
               <Skeleton width="50%" height="100px" />

@@ -1,11 +1,10 @@
 import { useState } from "react";
-
 import { FieldValues, useForm } from "react-hook-form";
-
-import Form from "../../components/common/Form";
+import Form from "../../components/common/PropertyForm";
 import { useAuth } from "../../shared/hooks/useAuth";
 import { axiosOpen } from "../../services/api/axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CreateProperty = () => {
   const navigate = useNavigate();
@@ -32,7 +31,10 @@ const CreateProperty = () => {
   };
 
   const onFinishHandler = async (data: FieldValues) => {
-    if (!propertyImage.name) return alert("Please select an image");
+    if (!propertyImage.name)
+      toast.error("Please select an image", {
+        position: "bottom-right",
+      });
     const propertyObject = {
       ...data,
       photo: propertyImage.url,

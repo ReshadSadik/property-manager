@@ -1,5 +1,6 @@
 import { BaseKey } from "@refinedev/core";
 import { PropertyProps } from "./common";
+import { ReviewProps } from "./review";
 
 export interface AgentCardProp {
   _id?: BaseKey | undefined;
@@ -7,6 +8,7 @@ export interface AgentCardProp {
   email: string;
   avatar: string;
   allProperties: PropertyProps[];
+  reviews: ReviewProps[];
   role: string;
   status?: string;
 }

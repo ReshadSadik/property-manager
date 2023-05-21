@@ -9,10 +9,13 @@ import {
   Select,
   MenuItem,
   Button,
+  IconButton,
 } from "@mui/material";
 
-import { FormProps } from "../../interfaces/common";
+import { PropertyFormProps } from "../../interfaces/common";
 import CustomButton from "./CustomButton";
+import ReactToastify from "./ReactToastify";
+import { ArrowBack } from "@mui/icons-material";
 
 const Form = ({
   type,
@@ -22,10 +25,21 @@ const Form = ({
   formLoading,
   onFinishHandler,
   propertyImage,
-}: FormProps) => {
+}: PropertyFormProps) => {
   return (
     <Box>
-      <Typography variant="h1">{type} Property</Typography>
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <IconButton
+          onClick={() => {
+            window.history.back();
+          }}
+        >
+          <ArrowBack color="action"></ArrowBack>
+        </IconButton>
+        <Typography variant="h3" textAlign="left">
+          {type} Property
+        </Typography>
+      </Box>
 
       <Box mt={2.5} borderRadius="15px" padding="20px" bgcolor="#fcfcfc">
         <form
@@ -212,6 +226,7 @@ const Form = ({
           />
         </form>
       </Box>
+      <ReactToastify />
     </Box>
   );
 };

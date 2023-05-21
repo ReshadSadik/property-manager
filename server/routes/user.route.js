@@ -1,11 +1,12 @@
 const express = require("express");
 const userController = require("../controllers/user.controller");
+const verifyUserToken = require("../middlewares/verifyRequest");
 
 const router = express.Router();
 
 router
   .route("/")
-  .get(userController.getAllAgents)
+  .get(verifyUserToken, userController.getAllAgents)
   .post(userController.createUser);
 router.post("/signup", userController.signUp);
 router.post("/login", userController.login);

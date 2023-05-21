@@ -15,6 +15,7 @@ const AgentProfile = () => {
     email: "",
     avatar: "",
     role: "",
+    reviews: [],
     allProperties: [],
   });
   useEffect(() => {
@@ -37,6 +38,7 @@ const AgentProfile = () => {
       name={agent?.name}
       email={agent.email}
       avatar={agent.avatar}
+      reviews={agent?.reviews}
       properties={agent?.allProperties}
     />
   );

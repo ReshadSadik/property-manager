@@ -53,7 +53,7 @@ const DrawerLarge = ({ open, toggleDrawerLarge, sidebarList, state }: any) => {
     setUserDetails(undefined);
   };
   const handleNavMenu = (title: string) => {
-    if (title === "SignOut") {
+    if (title === "Sign out") {
       signOut();
     }
   };

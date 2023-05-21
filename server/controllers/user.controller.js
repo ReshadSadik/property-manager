@@ -8,15 +8,27 @@ const { generateToken } = require("../utils/token");
 
 exports.getAllAgents = async (req, res) => {
   try {
-    const agents = await getAllAgentService();
-    res.status(200).json({
-      status: "success",
-      agents: agents,
-    });
+    const { userEmail = "" } = req.query;
+
+    //check if user is valid
+    if (userEmail === req.decodedUserEmail) {
+      const agents = await getAllAgentService();
+      res.status(200).json({
+        status: "success",
+        agents: agents,
+      });
+    } else {
+      res.status(403).json({
+        status: "fail",
+        error,
+        message: "you are not authorized",
+      });
+    }
   } catch (error) {
-    res.status(500).json({
+    res.status(401).json({
       status: "fail",
       error,
+      message: "you are not authorized",
     });
   }
 };
