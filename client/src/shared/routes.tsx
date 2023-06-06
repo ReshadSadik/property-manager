@@ -1,5 +1,5 @@
 export const ALL_ROUTES = {
-  LOGIN: `/login`,
+  LOGIN: `/auth`,
   HOME: "/",
   PROPERTIES: "/properties",
   AGENTS: "/agents",

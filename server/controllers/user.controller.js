@@ -32,7 +32,6 @@ exports.getAllAgents = async (req, res) => {
     });
   }
 };
-exports.createUser = async (req, res) => {};
 exports.getAgentByID = async (req, res) => {
   const { id } = req.params;
   try {

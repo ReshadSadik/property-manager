@@ -17,13 +17,18 @@ import {
   PropertyDetails,
 } from "./pages";
 import Reviews from "./pages/Reviews";
+import AuthLayout from "./pages/auth/AuthLayout";
+import Register from "./pages/auth/Register";
 
 function App() {
   return (
     <div className="App">
       <ContextProviderContainer>
         <Routes>
-          <Route path={ALL_ROUTES.LOGIN} element={<Login />} />
+          <Route path={ALL_ROUTES.LOGIN} element={<AuthLayout />}>
+            <Route path="register" element={<Register />} />
+            <Route index element={<Login />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
           <Route element={<ProtectedRoute />}>
             <Route path={ALL_ROUTES.HOME} element={<DashboardContainer />}>

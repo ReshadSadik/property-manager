@@ -12,7 +12,7 @@ export const defaultTheme = createTheme({
   },
   palette: {
     primary: {
-      main: "#475BE8",
+      main: "#6366F1",
       dark: "#008AC0",
     },
     grey: {

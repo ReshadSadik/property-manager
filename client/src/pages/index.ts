@@ -1,6 +1,6 @@
 import Dashboard from "./Dashboard";
 import { DashboardContainer } from "../components/layout/Layout";
-import Login from "./Login";
+import Login from "./auth/Login";
 import MyProfile from "./MyProfile";
 import NotFound from "./NotFound";
 import AgentProfile from "./agent/AgentProfile";

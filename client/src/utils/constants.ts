@@ -21,7 +21,7 @@ export const LIGHT_MODE_THEME = "light";
 
 // base url
 export const SERVER_BASE_URL =
-  // "https://property-manager-server.onrender.com/api/v1/";
+  "https://property-manager-server.onrender.com/api/v1/";
 
-  //local
-  "http://localhost:8080/api/v1/";
+//local
+// "http://localhost:8080/api/v1/";
