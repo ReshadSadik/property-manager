@@ -1,5 +1,4 @@
 import Dashboard from "./Dashboard";
-import { DashboardContainer } from "../components/layout/Layout";
 import Login from "./auth/Login";
 import MyProfile from "./MyProfile";
 import NotFound from "./NotFound";
@@ -11,7 +10,6 @@ import EditProperty from "./property/EditProperty";
 import PropertyDetails from "./property/PropertyDetails";
 
 export {
-  DashboardContainer,
   Dashboard,
   Login,
   MyProfile,

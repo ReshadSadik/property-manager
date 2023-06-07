@@ -4,7 +4,6 @@ import { ALL_ROUTES } from "./shared/routes";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { ContextProviderContainer } from "./components/ContextProviderContainer";
 import {
-  DashboardContainer,
   Dashboard,
   Login,
   NotFound,
@@ -20,6 +19,7 @@ import Reviews from "./pages/Reviews";
 import AuthLayout from "./pages/auth/AuthLayout";
 import Register from "./pages/auth/Register";
 import Messages from "./pages/Messages";
+import { DashboardContainer } from "./components";
 
 function App() {
   return (
