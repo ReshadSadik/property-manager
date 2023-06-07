@@ -29,7 +29,7 @@ const sidebarList = [
     link: ALL_ROUTES.MY_PROFILE,
     icon: AccountCircleOutlined,
   },
-  { title: "Sign out", link: "/login", icon: LogoutOutlinedIcon },
+  { title: "Sign out", link: "/auth", icon: LogoutOutlinedIcon },
 ];
 
 export function DashboardContainer() {

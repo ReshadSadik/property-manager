@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Avatar,
   Box,
@@ -10,18 +9,11 @@ import {
   Typography,
 } from "@mui/material";
 
-const user = {
-  avatar: "/assets/avatars/avatar-anika-visser.png",
-  city: "Los Angeles",
-  country: "USA",
-  jobTitle: "Senior Developer",
-  name: "Anika Visser",
-  timezone: "GTM-7",
-};
-const AccountProfile = () => {
+const AccountProfile = ({ user }: any) => {
   return (
     <Card
       sx={{
+        background: "#FCFCFC",
         boxShadow:
           "rgba(0, 0, 0, 0.04) 0px 5px 22px, rgba(0, 0, 0, 0.03) 0px 0px 0px 0.5px",
       }}
@@ -46,7 +38,7 @@ const AccountProfile = () => {
             {user.name}
           </Typography>
           <Typography color="text.secondary" variant="body2">
-            {user.city} {user.country}
+            Los Angeles, California
           </Typography>
           <Typography color="text.secondary" variant="body2">
             {user.timezone}
@@ -55,8 +47,17 @@ const AccountProfile = () => {
       </CardContent>
       <Divider />
       <CardActions>
-        <Button fullWidth variant="text">
+        <Button
+          component="label"
+          sx={{
+            width: "fit-content",
+            fontSize: 16,
+            textAlign: "center",
+            margin: "0 auto",
+          }}
+        >
           Upload picture
+          <input hidden accept="image/*" type="file" />
         </Button>
       </CardActions>
     </Card>

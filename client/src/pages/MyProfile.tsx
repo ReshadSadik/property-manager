@@ -55,8 +55,15 @@ const MyProfile = () => {
         </IconButton>
         <Typography variant="h1">My Profile</Typography>
       </Box>
-      <Box sx={{ background: "#FCFCFC", borderRadius: "10px", padding: 1 }}>
-        <Box mt="20px" borderRadius="15px">
+      <Box
+        sx={{
+          background: "#FCFCFC",
+          borderRadius: "10px",
+          padding: 1,
+          marginTop: 2,
+        }}
+      >
+        <Box mt="60px" borderRadius="15px">
           {/* details section */}
           {loading ? (
             <Box
@@ -84,10 +91,10 @@ const MyProfile = () => {
                   <div>
                     <Grid container spacing={3}>
                       <Grid xs={12} md={6} lg={4}>
-                        <AccountProfile />
+                        <AccountProfile user={myDetails} />
                       </Grid>
                       <Grid xs={12} md={6} lg={8}>
-                        <AccountProfileDetails />
+                        <AccountProfileDetails user={myDetails} />
                       </Grid>
                     </Grid>
                   </div>
@@ -102,6 +109,7 @@ const MyProfile = () => {
               display: "grid",
               gridTemplateColumns: { xs: "1fr", md: "330px 1fr" },
               gap: 4,
+              marginTop: 4,
             }}
           >
             {/* primary section */}
@@ -130,7 +138,7 @@ const MyProfile = () => {
                     value={myDetails?.allProperties?.length}
                     series={[myDetails?.allProperties?.length, 45]}
                     colors={["#FE6D8E", "#E4E8EF"]}
-                    sx={{ width: "auto" }}
+                    sx={{ width: "auto", background: "#E9e4e4" }}
                     padding={4}
                   />
                   <PieChart
@@ -138,7 +146,7 @@ const MyProfile = () => {
                     value={myDetails?.reviews?.length}
                     series={[60, 40]}
                     colors={["#c4e8ef", "#2ED480"]}
-                    sx={{ width: "auto" }}
+                    sx={{ width: "auto", background: "#e4e9e4" }}
                     padding={4}
                   />
 
@@ -147,14 +155,14 @@ const MyProfile = () => {
                     value={400}
                     series={[75, 25]}
                     colors={["#275be8", "#c4e8ef"]}
-                    sx={{ width: "auto" }}
+                    sx={{ width: "auto", background: "#e4e9e9" }}
                     padding={4}
                   />
                 </Box>
               </Box>
             )}
 
-            <Box mt={2.5} borderRadius="15px" padding="20px" bgcolor="#FCFCFC">
+            <Box borderRadius="15px" padding="0 20px" bgcolor="#FCFCFC">
               <Typography fontSize={18} fontWeight={600} color="#11142D">
                 My Properties
               </Typography>

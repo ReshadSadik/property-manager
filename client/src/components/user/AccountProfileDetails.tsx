@@ -30,11 +30,11 @@ const states = [
   },
 ];
 
-export const AccountProfileDetails = () => {
+export const AccountProfileDetails = ({ user }: any) => {
   const [values, setValues] = useState({
-    firstName: "Anika",
-    lastName: "Visser",
-    email: "demo@devias.io",
+    firstName: "",
+    lastName: "",
+    email: "",
     phone: "",
     state: "los-angeles",
     country: "USA",
@@ -68,12 +68,11 @@ export const AccountProfileDetails = () => {
               <Grid xs={12} md={6}>
                 <TextField
                   fullWidth
-                  helperText="Please specify the first name"
                   label="First name"
                   name="firstName"
                   onChange={handleChange}
                   required
-                  value={values.firstName}
+                  value={user.name}
                 />
               </Grid>
               <Grid xs={12} md={6}>
@@ -83,7 +82,7 @@ export const AccountProfileDetails = () => {
                   name="lastName"
                   onChange={handleChange}
                   required
-                  value={values.lastName}
+                  value={user.lastname}
                 />
               </Grid>
               <Grid xs={12} md={6}>
@@ -93,7 +92,7 @@ export const AccountProfileDetails = () => {
                   name="email"
                   onChange={handleChange}
                   required
-                  value={values.email}
+                  value={user.email}
                 />
               </Grid>
               <Grid xs={12} md={6}>
