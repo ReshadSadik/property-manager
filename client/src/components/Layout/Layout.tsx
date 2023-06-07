@@ -17,7 +17,7 @@ import {
 
 import { Header, DrawerLarge } from "../../components";
 import { ALL_ROUTES } from "../../shared/routes";
-
+//layout title changed
 const sidebarList = [
   { title: "Dashboard", link: "", icon: QrCodeIcon },
   { title: "Properties", link: ALL_ROUTES.PROPERTIES, icon: VillaOutlined },
