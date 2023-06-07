@@ -19,6 +19,7 @@ import {
 import Reviews from "./pages/Reviews";
 import AuthLayout from "./pages/auth/AuthLayout";
 import Register from "./pages/auth/Register";
+import Messages from "./pages/Messages";
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
               ></Route>
               <Route path={ALL_ROUTES.AGENTS} element={<Agents />}></Route>
               <Route path={ALL_ROUTES.REVIEWS} element={<Reviews />}></Route>
+              <Route path={ALL_ROUTES.MESSAGES} element={<Messages />}></Route>
               <Route index element={<Dashboard />}></Route>
             </Route>
           </Route>
