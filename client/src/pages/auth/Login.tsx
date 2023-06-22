@@ -167,7 +167,7 @@ const Login = () => {
             {method === "phoneNumber" && (
               <div>
                 <Typography sx={{ mb: 1 }} variant="h6">
-                  Not available now
+                  Not available now changed
                 </Typography>
               </div>
             )}
