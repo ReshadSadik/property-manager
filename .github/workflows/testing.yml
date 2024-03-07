@@ -5,21 +5,20 @@ on:
     branches:
       - develop
 
+defaults:
+  run:
+    working-directory: ./server
+
 jobs:
   test:
-    name: Run Server Tests
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          path: server
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
 
       - name: Install server dependencies
-        working-directory: server
         run: npm install
 
       - name: Run server tests
-        working-directory: server
         run: npm test
