@@ -1,14 +1,14 @@
-const User = require("../models/User");
-const mongoose = require("mongoose");
+const User = require('../models/User');
+const mongoose = require('mongoose');
 const {
   createPropertyService,
   getAllPropertyService,
   getPropertyDetailsService,
   deletePropertyByIdService,
   updatePropertyByIdService,
-} = require("../services/property.service");
+} = require('../services/property.service');
 
-const cloudinary = require("cloudinary").v2;
+const cloudinary = require('cloudinary').v2;
 
 // CLOUDINARY CONFIG FILE
 cloudinary.config({
@@ -22,7 +22,7 @@ exports.getAllProperties = async (req, res) => {
     let filters = { ...req.query };
 
     //sort , page , limit -> exclude
-    const excludeFields = ["sort", "page", "limit"];
+    const excludeFields = ['sort', 'page', 'limit'];
     excludeFields.forEach((field) => delete filters[field]);
 
     //gt ,lt ,gte .lte
@@ -38,13 +38,13 @@ exports.getAllProperties = async (req, res) => {
 
     if (req.query.sort) {
       // price,qunatity   -> 'price quantity'
-      const sortBy = req.query.sort.split(",").join(" ");
+      const sortBy = req.query.sort.split(',').join(' ');
       queries.sortBy = sortBy;
       console.log(sortBy);
     }
 
     if (req.query.fields) {
-      const fields = req.query.fields.split(",").join(" ");
+      const fields = req.query.fields.split(',').join(' ');
       queries.fields = fields;
       console.log(fields);
     }
@@ -60,12 +60,12 @@ exports.getAllProperties = async (req, res) => {
     const allProperties = await getAllPropertyService(filters, queries);
 
     res.status(200).json({
-      status: "success",
+      status: 'success',
       data: allProperties,
     });
   } catch (error) {
     res.status(400).json({
-      status: "fail",
+      status: 'fail',
       message: "can't get the data",
       error: error.message,
     });
@@ -77,14 +77,16 @@ exports.getPropertyDetail = async (req, res) => {
     const propertyDetails = await getPropertyDetailsService(id);
     if (!propertyDetails) {
       // return throw error
+      throw new Error('Property details not found');
+      
     }
     res.status(200).json({
-      status: "success",
+      status: 'success',
       data: propertyDetails,
     });
   } catch (error) {
     res.status(400).json({
-      status: "fail",
+      status: 'fail',
       message: "can't get property detail",
       error: error.message,
     });
@@ -101,7 +103,7 @@ exports.createProperty = async (req, res) => {
     session.startTransaction();
 
     const user = await User.findOne({ email }).session(session);
-    if (!user) throw new Error("User not found");
+    if (!user) throw new Error('User not found');
 
     // uploading property image to cloudinary
     const photoUrl = await cloudinary.uploader.upload(photo);
@@ -128,9 +130,9 @@ exports.createProperty = async (req, res) => {
 
     res
       .status(200)
-      .json({ status: "success", message: "Property created successfully" });
+      .json({ status: 'success', message: 'Property created successfully' });
   } catch (error) {
-    res.status(500).json({ status: "fail", message: error.message });
+    res.status(500).json({ status: 'fail', message: error.message });
   }
 };
 exports.updateProperty = async (req, res) => {
@@ -147,10 +149,10 @@ exports.updateProperty = async (req, res) => {
     if (response) {
       res
         .status(200)
-        .json({ status: "success", message: "Property updated successfully" });
+        .json({ status: 'success', message: 'Property updated successfully' });
     }
   } catch (error) {
-    res.status(500).json({ status: "fail", message: error.message });
+    res.status(500).json({ status: 'fail', message: error.message });
   }
 };
 exports.deleteProperty = async (req, res) => {
@@ -160,9 +162,9 @@ exports.deleteProperty = async (req, res) => {
     if (response.deletedCount > 0) {
       res
         .status(200)
-        .json({ status: "success", message: "Property deleted successfully" });
+        .json({ status: 'success', message: 'Property deleted successfully' });
     }
   } catch (error) {
-    res.status(500).json({ status: "fail", message: error.message });
+    res.status(500).json({ status: 'fail', message: error.message });
   }
 };
