@@ -1,0 +1,25 @@
+name: Run Server Tests
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  test:
+    name: Run Server Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          path: server
+
+      - name: Install server dependencies
+        working-directory: server
+        run: npm install
+
+      - name: Run server tests
+        working-directory: server
+        run: npm test

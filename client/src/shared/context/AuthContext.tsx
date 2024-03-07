@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction, createContext } from "react";
-import { AgentCardProp } from "../../interfaces/agent";
+import { Dispatch, SetStateAction, createContext } from 'react';
+import { AgentCardProp } from '../../interfaces/agent';
 
 export type AuthContextProps = {
   authToken: string | undefined;
@@ -13,16 +13,16 @@ export type AuthContextProps = {
 export const AuthContext = createContext<AuthContextProps>({
   authToken: undefined,
   setAuthToken: () => {},
-  error: "",
+  error: '',
   setError: () => {},
   userDetails: {
     _id: undefined,
-    name: "",
-    email: "",
-    avatar: "",
+    name: '',
+    email: '',
+    avatar: '',
     reviews: [],
     allProperties: [],
-    role: "",
+    role: '',
     status: undefined,
   },
   setUserDetails: () => {},
