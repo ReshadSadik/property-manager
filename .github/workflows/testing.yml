@@ -29,6 +29,8 @@ jobs:
   goodbye:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+      
       - name: saying goodbye after finished
         run: echo "goodbye for now"
         shell: bash
