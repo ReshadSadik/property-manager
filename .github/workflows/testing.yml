@@ -25,9 +25,10 @@ jobs:
 
       - name: Run server tests
         run: npm test
+
   goodbye:
     runs-on: ubuntu-latest
     steps:
       - name: saying goodbye after finished
-        run: echo 'goodbye for now'
+        run: echo "goodbye for now"
         shell: bash
