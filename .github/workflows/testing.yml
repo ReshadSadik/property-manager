@@ -4,15 +4,18 @@ on:
   push:
     branches:
       - develop
+  merge:
+    branches:
+      - main
+  workflow_dispatch:
 
 defaults:
   run:
     working-directory: ./server
 
 jobs:
-  test:
+  test-get-details:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -22,3 +25,9 @@ jobs:
 
       - name: Run server tests
         run: npm test
+  goodbye:
+    runs-on: ubuntu-latest
+    steps:
+      - name: saying goodbye after finished
+        run: echo 'goodbye for now'
+        shell: bash
