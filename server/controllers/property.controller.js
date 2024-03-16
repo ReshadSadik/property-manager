@@ -77,7 +77,7 @@ exports.getPropertyDetail = async (req, res) => {
     const propertyDetails = await getPropertyDetailsService(id);
     if (!propertyDetails) {
       // return throw error
-      // throw new Error('Property details not found');
+      throw new Error('Property details not found');
     }
     res.status(200).json({
       status: 'success',
