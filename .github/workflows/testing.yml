@@ -9,13 +9,13 @@ on:
       - main
   workflow_dispatch:
 
-defaults:
-  run:
-    working-directory: ./server
 
 jobs:
   test-get-details:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./server
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -28,7 +28,9 @@ jobs:
 
   goodbye:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./server
     steps:
       - name: saying goodbye after finished
         run: echo "goodbye for now"
-        shell: bash
