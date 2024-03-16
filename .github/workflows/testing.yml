@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - develop
-  merge:
+  pull_request:
     branches:
       - main
   workflow_dispatch:
