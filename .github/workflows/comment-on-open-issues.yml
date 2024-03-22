@@ -11,9 +11,9 @@
         - name: "dump github context"
           run: echo '${{ toJSON (github.event) }}' | jq
         - name: Create comment
-          uses: peter-evans/create-or-update-comment@v2
+          uses: peter-evans/create-or-update-comment@v4
           with:
-            issue-number: '${{ github.event.issue.number }}'
+            issue-number: ${{ github.event.issue.number }}
             body: |
               This is a multi-line test comment
               - With GitHub **Markdown** :sparkles:
