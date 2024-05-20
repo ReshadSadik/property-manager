@@ -10,10 +10,15 @@ import {
 import { useTheme } from "@emotion/react";
 
 const Dashboard = () => {
+  console.log(" test comment to review by AI"); 
   const theme = useTheme();
+
+  function test () {
+  console.log("this is an empty function");
+  }
   return (
     <Box>
-      <Typography variant="h1">Dashboard</Typography>
+      <Typography variant="h1"  style={{ color: 'blue' }}>Dashboard</Typography>
 
       <Box mt="20px" display="flex" flexWrap="wrap" gap={4}>
         <PieChart
@@ -41,14 +46,14 @@ const Dashboard = () => {
           colors={["#275be8", "#c4e8ef"]}
         />
       </Box>
-
+      {console.log("test 2 ")};
       <Stack
         mt="25px"
         width="100%"
         direction={{ xs: "column", lg: "row" }}
         gap={4}
       >
-        <TotalRevenue />
+        <TotalRevenue style={{ marginTop: '10px' }} />
         <PropertyReferrals />
       </Stack>
 
@@ -60,6 +65,7 @@ const Dashboard = () => {
         display="flex"
         flexDirection="column"
         minWidth="100%"
+        minWidth='100%'
         mt="25px"
       >
         <Typography fontSize="18px" fontWeight={600} color="#11142d">
